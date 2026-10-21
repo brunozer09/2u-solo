@@ -13,6 +13,7 @@ class EstadoAeronave:
     longitude: Optional[float] = None
     altitude: Optional[float] = None
     air_speed: Optional[float] = None
+    ultimo_timestamp: Optional[float] = None
     primeira_visao: float = field(default_factory=time.time)
     ultima_atualizacao: float = field(default_factory=time.time)
     num_atualizacoes: int = 0
@@ -70,6 +71,8 @@ class AircraftStore:
                 estado.altitude = atualizacao.altitude
             if atualizacao.air_speed is not None:
                 estado.air_speed = atualizacao.air_speed
+            if atualizacao.timestamp is not None:
+                estado.ultimo_timestamp = atualizacao.timestamp
 
             estado.ultima_atualizacao = agora
             estado.num_atualizacoes += 1
@@ -107,6 +110,7 @@ class AircraftStore:
                         "idade_segundos": idade,
                         "stale": idade > self.stale_after,
                         "num_atualizacoes": estado.num_atualizacoes,
+                        "ultimo_timestamp": estado.ultimo_timestamp,
                     }
                 )
             resultado.sort(key=lambda a: a["icao"])

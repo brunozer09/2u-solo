@@ -4,7 +4,8 @@ from typing import Optional
 from .log import warn, debug
 
 PREFIXO_ADSB = "adsb:"
-NUM_CAMPOS_ESPERADOS = 5
+NUM_CAMPOS_ESPERADOS = 6
+NUM_CAMPOS_LEGADO = 5
 
 PREFIXOS_DE_LOG = ("[LOG]", "[WARN]", "[ERROR]", "[DEBUG]")
 
@@ -16,6 +17,7 @@ class AtualizacaoAeronave:
     altitude: Optional[float]
     air_speed: Optional[float]
     raw: str
+    timestamp: Optional[float] = None
 
 
 def _parse_float_opcional(campo: str) -> Optional[float]:
@@ -57,25 +59,26 @@ def parse_line(linha: str) -> Optional[AtualizacaoAeronave]:
     corpo = linha[len(PREFIXO_ADSB):]
     campos = corpo.split(",")
 
-    if len(campos) != NUM_CAMPOS_ESPERADOS:
+    if len(campos) not in (NUM_CAMPOS_ESPERADOS, NUM_CAMPOS_LEGADO):
         warn(
             f"Linha 'adsb:' com {len(campos)} campo(s) "
             f"(esperado {NUM_CAMPOS_ESPERADOS}), ignorada: {linha_original!r}"
         )
         return None
 
-    icao_bruto, lat_bruta, lon_bruta, alt_bruta, spd_bruta = campos
-    icao = icao_bruto.strip()
+    icao_bruto, lat_bruta, lon_bruta, alt_bruta, spd_bruta, *resto = campos
+    ts_bruto = resto[0] if resto else ""
 
-    if not icao or icao.lower() == "none":
+    if not icao_bruto or icao_bruto.lower() == "none":
         warn(f"Linha 'adsb:' sem icao valido, ignorada: {linha_original!r}")
         return None
 
     return AtualizacaoAeronave(
-        icao=icao,
+        icao=icao_bruto,
         latitude=_parse_float_opcional(lat_bruta),
         longitude=_parse_float_opcional(lon_bruta),
         altitude=_parse_float_opcional(alt_bruta),
         air_speed=_parse_float_opcional(spd_bruta),
         raw=linha_original,
+        timestamp=_parse_float_opcional(ts_bruto),
     )

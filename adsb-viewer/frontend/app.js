@@ -67,6 +67,13 @@ function formatarIdade(segundos) {
   return `${horas}h${minutos % 60}min`;
 }
 
+function formatarTimestamp(ts) {
+  if (ts === null || ts === undefined) return null;
+  const data = new Date(ts * 1000);                 // epoch em segundos -> ms
+  if (Number.isNaN(data.getTime())) return null;
+  return data.toLocaleTimeString("pt-BR");          // HH:MM:SS no fuso do navegador
+}
+
 function celulaOuAusente(valorFormatado) {
   if (valorFormatado === null) {
     return '<span class="value-missing">&mdash;</span>';
@@ -105,11 +112,14 @@ function atualizarMapa(listaAeronaves) {
 
     const alt = celulaOuAusente(formatarValor(aero.altitude, 0));
     const spd = celulaOuAusente(formatarValor(aero.air_speed, 1));
+    const ts = celulaOuAusente(formatarTimestamp(aero.ultimo_timestamp));
+
     marcador.setPopupContent(
       `<div class="popup-title">${aero.icao}</div>` +
         `<div class="popup-row"><span>Altitude</span><span>${alt} ft</span></div>` +
         `<div class="popup-row"><span>Velocidade (ar)*</span><span>${spd} kt</span></div>` +
-        `<div class="popup-row"><span>Atualizado há</span><span>${formatarIdade(aero.idade_segundos)}</span></div>`
+        `<div class="popup-row"><span>Atualizado há</span><span>${formatarIdade(aero.idade_segundos)}</span></div>` +
+        `<div class="popup-row"><span>Última mensagem</span><span>${ts}</span></div>`
     );
   }
 
@@ -148,6 +158,7 @@ function atualizarTabela(listaAeronaves) {
     const lon = celulaOuAusente(formatarValor(aero.longitude, 5));
     const alt = celulaOuAusente(formatarValor(aero.altitude, 0));
     const spd = celulaOuAusente(formatarValor(aero.air_speed, 1));
+    const ts = celulaOuAusente(formatarTimestamp(aero.ultimo_timestamp));
     const badge = aero.stale
       ? '<span class="badge badge-stale">stale</span>'
       : '<span class="badge badge-live">ao vivo</span>';
@@ -159,6 +170,7 @@ function atualizarTabela(listaAeronaves) {
       `<td>${lon}</td>` +
       `<td>${alt}</td>` +
       `<td>${spd}</td>` +
+      `<td>${ts}</td>` +
       `<td>${formatarIdade(aero.idade_segundos)}</td>` +
       `<td>${badge}</td>` +
       `</tr>`
