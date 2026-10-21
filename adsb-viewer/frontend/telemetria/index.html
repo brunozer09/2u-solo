@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>ITACUBE — Telemetria</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script type="module" src="js/main.js"></script>
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand-block">
+            <div class="brand-mark">
+                <img class="logo-png" src="/assets/logo-header.png" alt="ITACUBE">
+            </div>
+            <div>
+                <div class="brand-line">
+                    <h1>ITACUBE</h1>
+                    <span class="mission-badge">CANSAT 2026</span>
+                </div>
+                <p>Estação de Solo · Telemetria em tempo real</p>
+            </div>
+        </div>
+
+        <div class="topbar-status">
+            <div class="status-item">
+                <span class="status-label">PACOTE</span>
+                <strong id="top-packet" data-field="id">—</strong>
+            </div>
+
+            <div class="status-item">
+                <span class="status-label">TEMPO</span>
+                <strong id="mission-time">00:00:00</strong>
+            </div>
+
+            <div class="connection" id="connection-box">
+                <span id="connection-dot"></span>
+                <div>
+                    <strong id="connection-text">Aguardando servidor</strong>
+                    <small id="connection-detail">Sem telemetria</small>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="section-bar" aria-label="Seções do painel">
+        <a class="tab" href="/">ADS-B</a>
+        <span class="active">TELEMETRIA</span>
+        <span class="section-spacer"></span>
+        <span id="ping-status" class="ping-status" role="status" aria-live="polite"></span>
+        <button type="button" id="ping-button" class="ping-button"
+                title="Envia 'P' pela serial à CanSat (atalho: tecla P). Só funciona com --serial.">PING</button>
+        <span id="packet-time" class="last-packet">ÚLTIMO PACOTE —</span>
+    </nav>
+
+    <main class="dashboard-shell">
+        <!-- Os painéis laterais abaixo do 3D, os cartões, gráficos e a faixa de
+             sensores são gerados por js/layout.js a partir do schema. -->
+        <aside class="side-column" id="side-column">
+
+            <section class="panel orientation-panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">ATITUDE</span>
+                        <h2>Orientação 3D</h2>
+                    </div>
+
+                    <span class="live-tag">LIVE</span>
+                </div>
+
+                <div class="model-container">
+                    <canvas id="glcanvas" aria-label="Modelo 3D do CanSat"></canvas>
+
+                    <div class="axis-hint" aria-hidden="true">
+                        <span class="axis-x">X</span>
+                        <span class="axis-y">Y</span>
+                        <span class="axis-z">Z</span>
+                    </div>
+                </div>
+
+                <div class="axis-values">
+                    <div>
+                        <span>GX</span>
+                        <strong data-field="gx">—</strong>
+                        <small>°/s</small>
+                    </div>
+
+                    <div>
+                        <span>GY</span>
+                        <strong data-field="gy">—</strong>
+                        <small>°/s</small>
+                    </div>
+
+                    <div>
+                        <span>GZ</span>
+                        <strong data-field="gz">—</strong>
+                        <small>°/s</small>
+                    </div>
+                </div>
+            </section>
+
+        </aside>
+
+        <section class="content-column">
+            <div class="summary-strip" id="resumo"></div>
+
+            <section class="charts-grid" id="charts-grid"></section>
+
+            <section class="panel sensor-strip" id="sensor-strip"></section>
+        </section>
+    </main>
+</body>
+</html>

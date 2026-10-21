@@ -1,0 +1,102 @@
+{
+  "versao": 1,
+
+  "campos": [
+    { "chave": "rssi",     "rotulo": "RSSI",          "unidade": "dBm",   "casas": 0 },
+    { "chave": "snr",      "rotulo": "SNR",           "unidade": "dB",    "casas": 1 },
+    { "chave": "size",     "rotulo": "Payload",       "unidade": "bytes", "casas": 0, "tipo": "int" },
+
+    { "chave": "id",       "rotulo": "ID",            "tipo": "texto" },
+    { "chave": "millis",   "rotulo": "Millis",        "tipo": "int" },
+
+    { "chave": "vbat",     "rotulo": "Tensão",        "rotulo_curto": "BATERIA",     "unidade": "V",  "casas": 2 },
+    { "chave": "ibat",     "rotulo": "Corrente",      "unidade": "mA",    "casas": 1 },
+
+    { "chave": "lat",      "rotulo": "Latitude",      "casas": 6 },
+    { "chave": "lon",      "rotulo": "Longitude",     "casas": 6 },
+    { "chave": "alt_gps",  "rotulo": "Altitude GPS",  "unidade": "m",     "casas": 1 },
+
+    { "chave": "pressao",  "rotulo": "Pressão",       "rotulo_curto": "PRESSÃO",     "unidade": "hPa", "casas": 2 },
+    { "chave": "alt_baro", "rotulo": "Altitude",      "rotulo_curto": "ALT. BARO",   "unidade": "m",   "casas": 1 },
+    { "chave": "temp",     "rotulo": "Temperatura",   "rotulo_curto": "TEMPERATURA", "unidade": "°C",  "casas": 1 },
+
+    { "chave": "ax",       "rotulo": "AX",            "unidade": "g",     "casas": 2 },
+    { "chave": "ay",       "rotulo": "AY",            "unidade": "g",     "casas": 2 },
+    { "chave": "az",       "rotulo": "AZ",            "unidade": "g",     "casas": 2 },
+
+    { "chave": "gx",       "rotulo": "GX",            "unidade": "°/s",   "casas": 1 },
+    { "chave": "gy",       "rotulo": "GY",            "unidade": "°/s",   "casas": 1 },
+    { "chave": "gz",       "rotulo": "GZ",            "unidade": "°/s",   "casas": 1 },
+
+    { "chave": "checksum", "rotulo": "Checksum",      "tipo": "int" },
+
+    { "chave": "taxa_hz",  "rotulo": "Taxa",          "unidade": "Hz",    "casas": 2, "derivado": true }
+  ],
+
+  "layout": {
+    "resumo": [
+      "alt_baro",
+      "temp",
+      { "campo": "pressao", "casas": 1 },
+      "vbat",
+      "rssi"
+    ],
+
+    "paineis_laterais": [
+      { "eyebrow": "PACOTE",   "titulo": "Estado da missão", "colunas": 2,
+        "campos": ["id", "millis", "taxa_hz", "size"], "selo": "checksum" },
+      { "eyebrow": "LINK",     "titulo": "Rádio e energia",  "colunas": 2,
+        "campos": ["rssi", "snr", "vbat", "ibat"] },
+      { "eyebrow": "POSIÇÃO",  "titulo": "GPS",              "colunas": 1,
+        "campos": ["lat", "lon", "alt_gps"] }
+    ],
+
+    "faixa_sensores": [
+      { "titulo": "BARÔMETRO",    "campos": ["pressao", "alt_baro", "temp"] },
+      { "titulo": "ACELERÔMETRO", "campos": ["ax", "ay", "az"] }
+    ],
+
+    "graficos": [
+      { "id": "altitude", "eyebrow": "ALTITUDE", "titulo": "Perfil vertical",
+        "destaque": ["alt_baro"],
+        "series": [
+          { "chave": "alt_baro", "rotulo": "Barométrica", "cor": "amber", "preencher": true },
+          { "chave": "alt_gps",  "rotulo": "GPS",         "cor": "cyan" }
+        ] },
+
+      { "id": "aceleracao", "eyebrow": "MOVIMENTO", "titulo": "Aceleração",
+        "destaque": ["ax", "ay", "az"],
+        "series": [
+          { "chave": "ax", "rotulo": "AX", "cor": "red" },
+          { "chave": "ay", "rotulo": "AY", "cor": "green" },
+          { "chave": "az", "rotulo": "AZ", "cor": "cyan" }
+        ] },
+
+      { "id": "giro", "eyebrow": "ATITUDE", "titulo": "Velocidade angular",
+        "destaque": ["gz"],
+        "series": [
+          { "chave": "gx", "rotulo": "GX", "cor": "red" },
+          { "chave": "gy", "rotulo": "GY", "cor": "green" },
+          { "chave": "gz", "rotulo": "GZ", "cor": "violet" }
+        ] },
+
+      { "id": "pressao", "eyebrow": "ATMOSFERA", "titulo": "Pressão barométrica",
+        "destaque": ["pressao"],
+        "series": [
+          { "chave": "pressao", "rotulo": "Pressão", "cor": "amber", "preencher": true }
+        ] },
+
+      { "id": "temperatura", "eyebrow": "ATMOSFERA", "titulo": "Temperatura",
+        "destaque": ["temp"],
+        "series": [
+          { "chave": "temp", "rotulo": "Temperatura", "cor": "red", "preencher": true }
+        ] },
+
+      { "id": "bateria", "eyebrow": "ENERGIA", "titulo": "Tensão da bateria",
+        "destaque": ["vbat"],
+        "series": [
+          { "chave": "vbat", "rotulo": "VBAT", "cor": "green", "preencher": true }
+        ] }
+    ]
+  }
+}

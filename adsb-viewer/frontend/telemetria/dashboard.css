@@ -1,0 +1,2268 @@
+:root {
+    --dashboard-ready: 1;
+
+    --bg: #111315;
+    --bg-deep: #0b0d0f;
+
+    --panel: #191c1f;
+    --panel-soft: #15181b;
+    --panel-strong: #202428;
+
+    --border: #34393e;
+    --border-soft: #292e33;
+
+    --text: #f3f5f6;
+    --muted: #929aa1;
+    --faint: #626b72;
+
+    --accent: #f2aa36;
+    --accent-soft: rgba(242, 170, 54, 0.12);
+    --accent-border: rgba(242, 170, 54, 0.42);
+
+    --green: #65d69a;
+    --red: #ff7474;
+    --cyan: #62cbea;
+    --violet: #b897ff;
+
+    --shadow:
+        0 16px 40px
+        rgba(0, 0, 0, 0.22);
+
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 320px;
+    background: var(--bg-deep);
+}
+
+body {
+    margin: 0;
+
+    min-height: 100vh;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 50% -18%,
+            rgba(242, 170, 54, 0.08),
+            transparent 34%
+        ),
+        var(--bg);
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    font-variant-numeric:
+        tabular-nums;
+}
+
+button,
+input,
+canvas {
+    font: inherit;
+}
+
+/* ==========================================================
+   TOPO
+   ========================================================== */
+
+.topbar {
+    min-height: 78px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    padding:
+        12px 24px;
+
+    background:
+        rgba(
+            12,
+            14,
+            16,
+            0.96
+        );
+
+    border-bottom:
+        1px solid
+        var(--border);
+}
+
+.brand-block,
+.brand-line,
+.topbar-status,
+.connection,
+.chart-heading,
+.panel-heading,
+.legend,
+.axis-values,
+.sensor-values {
+    display: flex;
+    align-items: center;
+}
+
+.brand-block {
+    gap: 12px;
+    min-width: 0;
+}
+
+.brand-mark {
+    width: 42px;
+    height: 42px;
+
+    flex:
+        0 0 42px;
+
+    display: grid;
+    place-items: center;
+
+    color:
+        #111315;
+
+    background:
+        var(--accent);
+
+    border-radius:
+        9px;
+
+    font-size:
+        14px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.08em;
+
+    box-shadow:
+        0 0 24px
+        rgba(
+            242,
+            170,
+            54,
+            0.15
+        );
+}
+
+.brand-line {
+    gap: 10px;
+}
+
+.brand-line h1 {
+    margin: 0;
+
+    font-size:
+        20px;
+
+    line-height:
+        1;
+
+    letter-spacing:
+        0.13em;
+}
+
+.brand-block p {
+    margin:
+        6px 0 0;
+
+    color:
+        var(--muted);
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        0.02em;
+}
+
+.mission-badge,
+.live-tag,
+.checksum {
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    min-height:
+        22px;
+
+    padding:
+        3px 7px;
+
+    border:
+        1px solid
+        var(--accent-border);
+
+    border-radius:
+        5px;
+
+    color:
+        var(--accent);
+
+    background:
+        var(--accent-soft);
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.08em;
+}
+
+.topbar-status {
+    justify-content:
+        flex-end;
+
+    gap:
+        22px;
+}
+
+.status-item {
+    min-width:
+        76px;
+}
+
+.status-label {
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+    color:
+        var(--faint);
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.11em;
+}
+
+.status-item strong {
+    font-size:
+        14px;
+
+    font-weight:
+        650;
+}
+
+/* ==========================================================
+   CONEXÃO
+   ========================================================== */
+
+.connection {
+    min-width:
+        220px;
+
+    gap:
+        10px;
+
+    padding:
+        8px 11px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        8px;
+
+    background:
+        var(--panel-soft);
+}
+
+.connection > div {
+    min-width:
+        0;
+}
+
+.connection strong,
+.connection small {
+    display:
+        block;
+
+    white-space:
+        nowrap;
+
+    overflow:
+        hidden;
+
+    text-overflow:
+        ellipsis;
+}
+
+.connection strong {
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+}
+
+.connection small {
+    margin-top:
+        2px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        9px;
+}
+
+#connection-dot {
+    width:
+        9px;
+
+    height:
+        9px;
+
+    flex:
+        0 0 9px;
+
+    border-radius:
+        50%;
+
+    background:
+        #686f75;
+}
+
+#connection-dot.server {
+    background:
+        var(--accent);
+
+    box-shadow:
+        0 0 12px
+        rgba(
+            242,
+            170,
+            54,
+            0.42
+        );
+}
+
+#connection-dot.active {
+    background:
+        var(--green);
+
+    box-shadow:
+        0 0 13px
+        rgba(
+            101,
+            214,
+            154,
+            0.5
+        );
+}
+
+#connection-dot.error {
+    background:
+        var(--red);
+
+    box-shadow:
+        0 0 12px
+        rgba(
+            255,
+            116,
+            116,
+            0.36
+        );
+}
+
+/* ==========================================================
+   BARRA SECUNDÁRIA
+   ========================================================== */
+
+.section-bar {
+    height:
+        38px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        4px;
+
+    padding:
+        0 24px;
+
+    color:
+        var(--faint);
+
+    background:
+        #151719;
+
+    border-bottom:
+        1px solid
+        var(--border-soft);
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.1em;
+}
+
+.section-bar >
+span:not(.section-spacer):not(.last-packet) {
+    height:
+        38px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    padding:
+        0 14px;
+
+    border-bottom:
+        2px solid
+        transparent;
+}
+
+.section-bar .active {
+    color:
+        var(--accent);
+
+    border-bottom-color:
+        var(--accent) !important;
+}
+
+.section-spacer {
+    flex:
+        1 1 auto;
+}
+
+.last-packet {
+    color:
+        var(--muted);
+
+    letter-spacing:
+        0.05em;
+}
+
+/* ==========================================================
+   ESTRUTURA DO DASHBOARD
+   ========================================================== */
+
+.dashboard-shell {
+    width:
+        min(
+            1880px,
+            100%
+        );
+
+    margin:
+        0 auto;
+
+    padding:
+        16px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(300px, 360px)
+        minmax(0, 1fr);
+
+    gap:
+        14px;
+}
+
+.side-column,
+.content-column {
+    min-width:
+        0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        14px;
+}
+
+.panel {
+    min-width:
+        0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(
+                29,
+                33,
+                36,
+                0.98
+            ),
+            rgba(
+                23,
+                26,
+                29,
+                0.98
+            )
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        var(--shadow);
+}
+
+.orientation-panel,
+.telemetry-panel,
+.chart-card,
+.sensor-strip {
+    padding:
+        14px;
+}
+
+.panel-heading {
+    justify-content:
+        space-between;
+
+    gap:
+        12px;
+
+    margin-bottom:
+        11px;
+}
+
+.compact-heading {
+    margin-bottom:
+        10px;
+}
+
+.eyebrow {
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+    color:
+        var(--accent);
+
+    font-size:
+        8px;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        0.12em;
+}
+
+.panel-heading h2,
+.chart-heading h3 {
+    margin:
+        0;
+
+    color:
+        var(--text);
+
+    font-size:
+        13px;
+
+    font-weight:
+        680;
+
+    letter-spacing:
+        0.01em;
+}
+
+.live-tag {
+    color:
+        var(--green);
+
+    border-color:
+        rgba(
+            101,
+            214,
+            154,
+            0.28
+        );
+
+    background:
+        rgba(
+            101,
+            214,
+            154,
+            0.08
+        );
+}
+
+/* ==========================================================
+   MODELO 3D
+   ========================================================== */
+
+.model-container {
+    position:
+        relative;
+
+    height:
+        310px;
+
+    overflow:
+        hidden;
+
+    border-top:
+        1px solid
+        var(--border-soft);
+
+    border-bottom:
+        1px solid
+        var(--border-soft);
+
+    background:
+        transparent;
+}
+
+.model-container::before,
+.model-container::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    z-index:
+        0;
+
+    pointer-events:
+        none;
+
+    opacity:
+        0.2;
+}
+
+.model-container::before {
+    inset:
+        50% 10% auto;
+
+    height:
+        1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--border),
+            transparent
+        );
+}
+
+.model-container::after {
+    inset:
+        9% auto 9% 50%;
+
+    width:
+        1px;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            var(--border),
+            transparent
+        );
+}
+
+#glcanvas {
+    position:
+        relative;
+
+    z-index:
+        1;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    display:
+        block;
+
+    background:
+        transparent;
+}
+
+.axis-hint {
+    position:
+        absolute;
+
+    z-index:
+        2;
+
+    right:
+        9px;
+
+    bottom:
+        8px;
+
+    display:
+        flex;
+
+    gap:
+        4px;
+
+    pointer-events:
+        none;
+}
+
+.axis-hint span {
+    width:
+        20px;
+
+    height:
+        20px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        4px;
+
+    background:
+        rgba(
+            13,
+            15,
+            17,
+            0.66
+        );
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+}
+
+.axis-x {
+    color:
+        var(--red);
+}
+
+.axis-y {
+    color:
+        var(--green);
+}
+
+.axis-z {
+    color:
+        var(--cyan);
+}
+
+.axis-values {
+    gap:
+        7px;
+
+    margin-top:
+        11px;
+}
+
+.axis-values > div {
+    flex:
+        1 1 0;
+
+    min-width:
+        0;
+
+    padding:
+        8px 9px;
+
+    border:
+        1px solid
+        var(--border-soft);
+
+    border-radius:
+        7px;
+
+    background:
+        #14171a;
+}
+
+.axis-values span,
+.axis-values small {
+    color:
+        var(--muted);
+
+    font-size:
+        8px;
+}
+
+.axis-values strong {
+    margin:
+        0 4px;
+
+    font-size:
+        14px;
+
+    font-weight:
+        680;
+}
+
+/* ==========================================================
+   BLOCOS DE DADOS
+   ========================================================== */
+
+.data-grid {
+    display:
+        grid;
+
+    gap:
+        7px;
+}
+
+.two-columns {
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+}
+
+.gps-values {
+    grid-template-columns:
+        1fr;
+}
+
+.data-cell {
+    min-width:
+        0;
+
+    padding:
+        8px 9px;
+
+    border:
+        1px solid
+        var(--border-soft);
+
+    border-radius:
+        7px;
+
+    background:
+        #14171a;
+}
+
+.data-cell > span {
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        8px;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        0.06em;
+}
+
+.data-cell strong {
+    font-size:
+        15px;
+
+    font-weight:
+        680;
+}
+
+.data-cell small {
+    margin-left:
+        4px;
+
+    color:
+        var(--faint);
+
+    font-size:
+        8px;
+}
+
+.wide-value strong {
+    font-size:
+        13px;
+}
+
+.checksum.ok {
+    color:
+        var(--green);
+
+    border-color:
+        rgba(
+            101,
+            214,
+            154,
+            0.3
+        );
+
+    background:
+        rgba(
+            101,
+            214,
+            154,
+            0.08
+        );
+}
+
+.checksum.error {
+    color:
+        var(--red);
+
+    border-color:
+        rgba(
+            255,
+            116,
+            116,
+            0.3
+        );
+
+    background:
+        rgba(
+            255,
+            116,
+            116,
+            0.08
+        );
+}
+
+/* ==========================================================
+   RESUMO
+   ========================================================== */
+
+.summary-strip {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            5,
+            minmax(0, 1fr)
+        );
+
+    gap:
+        8px;
+}
+
+.summary-card {
+    min-width:
+        0;
+
+    padding:
+        10px 12px;
+
+    background:
+        #181b1e;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-top:
+        2px solid
+        var(--accent);
+
+    border-radius:
+        9px;
+}
+
+.summary-card > span {
+    display:
+        block;
+
+    margin-bottom:
+        4px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.08em;
+}
+
+.summary-card strong {
+    font-size:
+        19px;
+
+    font-weight:
+        700;
+}
+
+.summary-card small {
+    margin-left:
+        5px;
+
+    color:
+        var(--faint);
+
+    font-size:
+        9px;
+}
+
+/* ==========================================================
+   GRÁFICOS
+   ========================================================== */
+
+.charts-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap:
+        10px;
+}
+
+.chart-card {
+    min-height:
+        250px;
+
+    border-color:
+        #3a3d3f;
+}
+
+.chart-card:hover {
+    border-color:
+        var(--accent-border);
+}
+
+.chart-heading {
+    justify-content:
+        space-between;
+
+    gap:
+        10px;
+}
+
+.chart-heading strong {
+    color:
+        var(--text);
+
+    font-size:
+        11px;
+
+    font-weight:
+        680;
+}
+
+.legend {
+    gap:
+        12px;
+
+    min-height:
+        22px;
+
+    margin:
+        6px 0 2px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        8px;
+}
+
+.legend span {
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        5px;
+}
+
+.legend-line {
+    width:
+        12px;
+
+    height:
+        2px;
+
+    border-radius:
+        99px;
+
+    background:
+        var(--accent);
+}
+
+.legend-line.amber {
+    background:
+        var(--accent);
+}
+
+.legend-line.red {
+    background:
+        var(--red);
+}
+
+.legend-line.green {
+    background:
+        var(--green);
+}
+
+.legend-line.cyan {
+    background:
+        var(--cyan);
+}
+
+.legend-line.violet {
+    background:
+        var(--violet);
+}
+
+.telemetry-chart {
+    width:
+        100%;
+
+    height:
+        184px;
+
+    display:
+        block;
+}
+
+/* ==========================================================
+   SENSORES INFERIORES
+   ========================================================== */
+
+.sensor-strip {
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        1px
+        minmax(0, 1fr);
+
+    gap:
+        16px;
+
+    align-items:
+        stretch;
+}
+
+.sensor-group {
+    min-width:
+        0;
+}
+
+.sensor-values {
+    gap:
+        8px;
+}
+
+.sensor-values > div {
+    flex:
+        1 1 0;
+
+    min-width:
+        0;
+
+    padding:
+        7px 8px;
+
+    background:
+        #14171a;
+
+    border:
+        1px solid
+        var(--border-soft);
+
+    border-radius:
+        7px;
+}
+
+.sensor-values span {
+    display:
+        block;
+
+    margin-bottom:
+        2px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        8px;
+}
+
+.sensor-values strong {
+    font-size:
+        13px;
+
+    font-weight:
+        680;
+}
+
+.sensor-values small {
+    margin-left:
+        4px;
+
+    color:
+        var(--faint);
+
+    font-size:
+        8px;
+}
+
+.sensor-divider {
+    width:
+        1px;
+
+    background:
+        var(--border-soft);
+}
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
+@media (max-width: 1220px) {
+
+    .dashboard-shell {
+        grid-template-columns:
+            300px
+            minmax(0, 1fr);
+    }
+
+    .summary-strip {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+    }
+}
+
+@media (max-width: 980px) {
+
+    .topbar {
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+    .topbar-status {
+        width:
+            100%;
+
+        justify-content:
+            space-between;
+    }
+
+    .dashboard-shell {
+        grid-template-columns:
+            1fr;
+    }
+
+    .side-column {
+        display:
+            grid;
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+    .orientation-panel {
+        grid-row:
+            span 2;
+    }
+}
+
+@media (max-width: 720px) {
+
+    .topbar,
+    .section-bar {
+        padding-left:
+            14px;
+
+        padding-right:
+            14px;
+    }
+
+    .topbar-status {
+        display:
+            grid;
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap:
+            8px;
+    }
+
+    .connection {
+        grid-column:
+            1 / -1;
+
+        width:
+            100%;
+    }
+
+    .section-bar >
+    span:not(.active):not(.section-spacer):not(.last-packet) {
+        display:
+            none;
+    }
+
+    .dashboard-shell {
+        padding:
+            10px;
+    }
+
+    .side-column,
+    .charts-grid,
+    .summary-strip,
+    .sensor-strip {
+        grid-template-columns:
+            1fr;
+    }
+
+    .orientation-panel {
+        grid-row:
+            auto;
+    }
+
+    .model-container {
+        height:
+            280px;
+    }
+
+    .sensor-divider {
+        width:
+            100%;
+
+        height:
+            1px;
+    }
+}
+/* ==========================================================
+   ITACUBE — IDENTIDADE VISUAL
+   Cole este bloco NO FINAL do dashboard.css
+   ========================================================== */
+
+:root {
+    --dashboard-ready: 1;
+
+    /* Fundo */
+    --bg: #070b13;
+    --bg-deep: #03060c;
+
+    /* Painéis */
+    --panel: #0d1521;
+    --panel-soft: #09111c;
+    --panel-strong: #121d2c;
+
+    /* Bordas */
+    --border: #223149;
+    --border-soft: #17243a;
+
+    /* Textos */
+    --text: #f4f7fb;
+    --muted: #96a4ba;
+    --faint: #65758d;
+
+    /* Azul ITACUBE */
+    --accent: #6098df;
+    --accent-light: #78adf0;
+    --accent-dark: #3977c6;
+
+    --accent-soft: rgba(96, 152, 223, 0.12);
+    --accent-border: rgba(96, 152, 223, 0.42);
+
+    /* Cores secundárias dos gráficos */
+    --green: #64d6ae;
+    --red: #ff7180;
+    --cyan: #69c8ed;
+    --violet: #a99bf4;
+
+    --shadow:
+        0 18px 45px
+        rgba(0, 0, 0, 0.32);
+
+    --radius: 13px;
+}
+
+
+/* ==========================================================
+   FUNDO E TIPOGRAFIA
+   ========================================================== */
+
+html {
+    background: var(--bg-deep);
+}
+
+body {
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 50% -15%,
+            rgba(96, 152, 223, 0.13),
+            transparent 36%
+        ),
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(96, 152, 223, 0.05),
+            transparent 28%
+        ),
+        linear-gradient(
+            180deg,
+            #080d16 0%,
+            #050911 48%,
+            #03060c 100%
+        );
+
+    font-family:
+        "Avenir Next",
+        "Century Gothic",
+        Montserrat,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-variant-numeric: tabular-nums;
+
+    letter-spacing: 0.01em;
+}
+
+
+/* ==========================================================
+   TOPO
+   ========================================================== */
+
+.topbar {
+    min-height: 92px;
+
+    padding:
+        10px 24px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(7, 11, 19, 0.99),
+            rgba(5, 9, 16, 0.98)
+        );
+
+    border-bottom:
+        1px solid
+        rgba(96, 152, 223, 0.22);
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.18);
+}
+
+
+/* ==========================================================
+   LOGO ITACUBE — BEM PEQUENA
+   ========================================================== */
+
+.brand-mark {
+    width: 42px !important;
+    height: 28px !important;
+
+    flex: 0 0 42px !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    overflow: hidden !important;
+
+    opacity: 0.75;
+}
+
+.brand-mark img {
+    width: 42px !important;
+    height: 42px !important;
+
+    max-width: 42px !important;
+    max-height: 42px !important;
+
+    object-fit: contain !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    filter:
+        invert(1)
+        hue-rotate(180deg)
+        saturate(1.05)
+        brightness(1.05);
+
+    position: absolute !important;
+}
+
+
+/* aproxima a logo do restante do cabeçalho */
+
+.brand-block {
+    gap: 8px !important;
+}
+
+
+/* reduz também um pouco a altura do cabeçalho */
+
+.topbar {
+    min-height: 64px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+
+/* celular */
+
+@media (max-width: 720px) {
+
+    .brand-mark {
+        width: 36px !important;
+        height: 24px !important;
+        flex-basis: 36px !important;
+    }
+
+    .brand-mark img {
+        width: 36px !important;
+        height: 36px !important;
+        max-width: 36px !important;
+        max-height: 36px !important;
+    }
+}
+
+/* ==========================================================
+   TEXTO DA MARCA
+   ========================================================== */
+
+.brand-line {
+    gap: 10px;
+}
+
+.brand-line h1 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-family:
+        "Avenir Next",
+        "Century Gothic",
+        Montserrat,
+        "Segoe UI",
+        sans-serif;
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    font-weight: 600;
+
+    letter-spacing: 0.08em;
+}
+
+.brand-block p {
+    margin:
+        7px 0 0;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* ==========================================================
+   BADGES
+   ========================================================== */
+
+.mission-badge,
+.checksum {
+    color: var(--accent);
+
+    background:
+        rgba(96, 152, 223, 0.09);
+
+    border-color:
+        rgba(96, 152, 223, 0.34);
+
+    border-radius: 6px;
+}
+
+.mission-badge {
+    font-weight: 700;
+}
+
+
+/* ==========================================================
+   STATUS SUPERIOR
+   ========================================================== */
+
+.status-label {
+    color: var(--faint);
+
+    font-family:
+        "Avenir Next",
+        "Century Gothic",
+        Montserrat,
+        "Segoe UI",
+        sans-serif;
+
+    font-weight: 700;
+
+    letter-spacing: 0.1em;
+}
+
+.status-item strong {
+    color: var(--text);
+
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   CONEXÃO
+   ========================================================== */
+
+.connection {
+    background:
+        linear-gradient(
+            180deg,
+            #0c1420,
+            #09111b
+        );
+
+    border-color:
+        var(--border-soft);
+}
+
+.connection strong {
+    color: var(--text);
+}
+
+.connection small {
+    color: var(--muted);
+}
+
+
+#connection-dot.server {
+    background:
+        var(--accent);
+
+    box-shadow:
+        0 0 14px
+        rgba(96, 152, 223, 0.55);
+}
+
+
+/* ==========================================================
+   BARRA SECUNDÁRIA
+   ========================================================== */
+
+.section-bar {
+    background:
+        rgba(7, 12, 20, 0.96);
+
+    border-bottom:
+        1px solid
+        var(--border-soft);
+
+    color:
+        var(--faint);
+}
+
+.section-bar .active {
+    color:
+        var(--accent);
+
+    border-bottom-color:
+        var(--accent) !important;
+}
+
+
+/* ==========================================================
+   PAINÉIS
+   ========================================================== */
+
+.panel {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16, 25, 39, 0.98),
+            rgba(9, 15, 25, 0.98)
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        0 14px 35px
+        rgba(0, 0, 0, 0.24);
+}
+
+
+/* leve iluminação superior nos painéis */
+
+.panel {
+    position: relative;
+}
+
+.panel::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 16px;
+    right: 16px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(96, 152, 223, 0.28),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   TÍTULOS DOS PAINÉIS
+   ========================================================== */
+
+.eyebrow {
+    color:
+        var(--accent);
+
+    font-weight: 750;
+
+    letter-spacing:
+        0.14em;
+}
+
+.panel-heading h2,
+.chart-heading h3 {
+    color:
+        var(--text);
+
+    font-family:
+        "Avenir Next",
+        "Century Gothic",
+        Montserrat,
+        "Segoe UI",
+        sans-serif;
+
+    font-weight: 600;
+
+    letter-spacing:
+        0.015em;
+}
+
+
+/* ==========================================================
+   MODELO 3D
+   ========================================================== */
+
+.model-container {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(96, 152, 223, 0.035),
+            transparent 62%
+        );
+
+    border-top:
+        1px solid
+        var(--border-soft);
+
+    border-bottom:
+        1px solid
+        var(--border-soft);
+}
+
+#glcanvas {
+    background:
+        transparent;
+}
+
+
+/* ==========================================================
+   VALORES DE EIXOS
+   ========================================================== */
+
+.axis-values > div {
+    background:
+        rgba(6, 12, 20, 0.72);
+
+    border:
+        1px solid
+        var(--border-soft);
+
+    border-radius:
+        8px;
+}
+
+.axis-values strong {
+    color:
+        var(--text);
+
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   CÉLULAS DE TELEMETRIA
+   ========================================================== */
+
+.data-cell {
+    background:
+        rgba(6, 12, 20, 0.72);
+
+    border:
+        1px solid
+        var(--border-soft);
+
+    border-radius:
+        8px;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease;
+}
+
+.data-cell:hover {
+    background:
+        rgba(13, 24, 39, 0.86);
+
+    border-color:
+        rgba(96, 152, 223, 0.3);
+}
+
+.data-cell > span {
+    color:
+        var(--muted);
+}
+
+.data-cell strong {
+    color:
+        var(--text);
+
+    font-weight:
+        600;
+}
+
+.data-cell small {
+    color:
+        var(--faint);
+}
+
+
+/* ==========================================================
+   RESUMO
+   ========================================================== */
+
+.summary-card {
+    background:
+        linear-gradient(
+            160deg,
+            #101a28,
+            #0a111c
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-top:
+        2px solid
+        var(--accent);
+
+    border-radius:
+        10px;
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.015);
+
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.summary-card:hover {
+    transform:
+        translateY(-1px);
+
+    border-color:
+        rgba(96, 152, 223, 0.34);
+
+    box-shadow:
+        0 9px 22px
+        rgba(0, 0, 0, 0.18);
+}
+
+.summary-card > span {
+    color:
+        var(--muted);
+
+    font-weight:
+        700;
+}
+
+.summary-card strong {
+    color:
+        var(--text);
+
+    font-weight:
+        600;
+}
+
+
+/* ==========================================================
+   GRÁFICOS
+   ========================================================== */
+
+.chart-card {
+    border-color:
+        var(--border);
+
+    background:
+        linear-gradient(
+            160deg,
+            rgba(15, 24, 38, 0.98),
+            rgba(8, 14, 23, 0.98)
+        );
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.chart-card:hover {
+    border-color:
+        var(--accent-border);
+
+    box-shadow:
+        0 15px 34px
+        rgba(0, 0, 0, 0.28),
+        0 0 0 1px
+        rgba(96, 152, 223, 0.04);
+}
+
+.chart-heading strong {
+    color:
+        var(--text);
+
+    font-weight:
+        600;
+}
+
+
+/* ==========================================================
+   LEGENDA DOS GRÁFICOS
+   ========================================================== */
+
+.legend {
+    color:
+        var(--muted);
+}
+
+.legend-line,
+.legend-line.amber {
+    background:
+        var(--accent);
+}
+
+
+/* ==========================================================
+   SENSORES INFERIORES
+   ========================================================== */
+
+.sensor-values > div {
+    background:
+        rgba(6, 12, 20, 0.72);
+
+    border:
+        1px solid
+        var(--border-soft);
+
+    border-radius:
+        8px;
+}
+
+.sensor-values span {
+    color:
+        var(--muted);
+}
+
+.sensor-values strong {
+    color:
+        var(--text);
+
+    font-weight:
+        600;
+}
+
+
+/* ==========================================================
+   INDICADOR DOS EIXOS
+   ========================================================== */
+
+.axis-hint span {
+    background:
+        rgba(5, 10, 17, 0.88);
+
+    border:
+        1px solid
+        var(--border);
+}
+
+
+/* ==========================================================
+   SELEÇÃO DE TEXTO
+   ========================================================== */
+
+::selection {
+    color:
+        #ffffff;
+
+    background:
+        rgba(96, 152, 223, 0.45);
+}
+
+
+/* ==========================================================
+   SCROLLBAR
+   ========================================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background:
+        #050911;
+}
+
+::-webkit-scrollbar-thumb {
+    background:
+        #223149;
+
+    border-radius:
+        999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background:
+        #34537a;
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 720px) {
+
+    .topbar {
+        min-height:
+            auto;
+    }
+
+    .brand-mark {
+        width:
+            150px;
+
+        height:
+            66px;
+
+        flex-basis:
+            150px;
+    }
+
+    .brand-mark img {
+        width:
+            150px;
+
+        height:
+            150px;
+    }
+
+    .brand-line h1 {
+        font-size:
+            17px;
+    }
+}
+
+/* ==========================================================
+   INTEGRAÇÃO COM O PROJETO ADS-B
+   (adicionado: navegação entre páginas, botão PING, logo
+   do projeto e painéis gerados a partir do schema)
+   ========================================================== */
+
+/* Logo do projeto (PNG claro sobre fundo transparente): anula o filtro de
+   inversão que existia para o JPG antigo e aumenta a área útil. */
+.brand-mark {
+    width: 54px !important;
+    height: 36px !important;
+    flex-basis: 54px !important;
+    opacity: 1 !important;
+}
+
+.brand-mark img.logo-png {
+    width: 54px !important;
+    height: 36px !important;
+    max-width: 54px !important;
+    max-height: 36px !important;
+    filter: none !important;
+}
+
+/* Aba-link da barra secundária (mesmo visual das abas <span>) */
+.section-bar > a.tab {
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 14px;
+    border-bottom: 2px solid transparent;
+    color: inherit;
+    text-decoration: none;
+}
+
+.section-bar > a.tab:hover,
+.section-bar > a.tab:focus-visible {
+    color: var(--text);
+    border-bottom-color: var(--border);
+    outline: none;
+}
+
+/* Botão PING */
+.ping-button {
+    height: 24px;
+    padding: 0 12px;
+    margin-right: 12px;
+
+    font: inherit;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.ping-button:hover,
+.ping-button:focus-visible {
+    background: rgba(242, 170, 54, 0.22);
+    outline: none;
+}
+
+.ping-button:active {
+    transform: translateY(1px);
+}
+
+.section-bar > span.ping-status {
+    height: auto !important;
+    padding: 0 !important;
+    margin-right: 10px;
+    border-bottom: 0 !important;
+    color: var(--green);
+    letter-spacing: 0.05em;
+}
+
+.section-bar > span.ping-status.error {
+    color: var(--red);
+}
+
+/* Painéis laterais com 3 colunas (layout.paineis_laterais[].colunas = 3) */
+.three-columns {
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+}

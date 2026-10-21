@@ -1,0 +1,26 @@
+[LOG] Comecando execucao
+[LOG] Inicializando o dump1090
+[LOG] Abrindo porta serial em print
+[LOG] Conectando ao dump1090...
+[LOG] Conectado! Recebendo dados...
+[DEBUG] adsb:e49c07,None,None,18100,370.3
+adsb:e49c07,None,None,18100,370.3
+[DEBUG] adsb:e4a5b4,None,None,21050,379.7
+adsb:e4a5b4,None,None,21050,379.7
+[DEBUG] adsb:e49c07,-22.547623,-46.248067,18000,370.4
+adsb:e49c07,-22.547623,-46.248067,18000,370.4
+[DEBUG] adsb:e4a5b4,-23.096603,-46.023177,21125,380.2
+adsb:e4a5b4,-23.096603,-46.023177,21125,380.2
+[DEBUG] adsb:e49c07,-22.545910,-46.246210,17950,368.9
+adsb:e49c07,-22.545910,-46.246210,17950,368.9
+[WARN] linha corrompida recebida da estacao de solo
+adsb:c0ffee,-22.610000,-46.100000,9500,210.5
+[DEBUG] adsb:e4a5b4,-23.091200,-46.018900,21200,381.0
+adsb:e4a5b4,-23.091200,-46.018900,21200,381.0
+adsb:e49c07,-22.544300,-46.244500,17900,367.5
+adsb:c0ffee,-22.606500,-46.095200,9600,212.1
+[ERROR] Erro de conexao com o dump1090: timeout
+adsb:e4a5b4,-23.086900,-46.014700,21250,381.6
+adsb:e49c07,-22.542900,-46.242700,17850,366.2
+adsb:c0ffee,None,None,9700,213.0
+adsb:e49c07,-22.541500,-46.240900,17800,365.0

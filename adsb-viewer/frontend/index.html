@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visualizador ADS-B · Enlace Satélite</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+  <img class="brand-logo" src="/assets/logo-header.png" alt="ITACUBE" />
+
+    <div class="topbar-titles">
+      <h1>Visualizador de Sinais ADS-B</h1>
+    </div>
+
+    <nav class="topnav" aria-label="Seções">
+      <a class="active" href="/" aria-current="page">ADS-B</a>
+      <a href="/telemetria/">Telemetria</a>
+    </nav>
+
+    <div class="status-cluster">
+      <div class="status-counts">
+        <span><strong id="stat-total">0</strong> rastreadas</span>
+        <span><strong id="stat-posicionadas">0</strong> no mapa</span>
+      </div>
+      <div class="radar-scope" id="radar-scope" aria-hidden="true"></div>
+      <div class="status-text" id="status-text">
+        <span class="status-label" id="status-label">CONECTANDO</span>
+        <span class="status-meta" id="status-meta">&mdash;</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel" aria-label="Mapa de aeronaves">
+      <div class="panel-head">
+        <h2>Mapa</h2>
+        <span class="panel-note">posição conhecida apenas</span>
+      </div>
+      <div id="map" role="img" aria-label="Mapa com a posição das aeronaves rastreadas"></div>
+    </section>
+
+    <section class="panel" aria-label="Tabela de aeronaves">
+      <div class="panel-head">
+        <h2>Aeronaves rastreadas</h2>
+        <span class="panel-note" id="table-count-note">&mdash;</span>
+      </div>
+      <div class="table-scroll">
+        <table class="aircraft-table">
+          <thead>
+            <tr>
+              <th scope="col">ICAO</th>
+              <th scope="col">Latitude</th>
+              <th scope="col">Longitude</th>
+              <th scope="col">Altitude (ft)</th>
+              <th scope="col">Velocidade (ar)*</th>
+              <th scope="col">Atualizado há</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- preenchido via app.js -->
+          </tbody>
+        </table>
+        <div class="table-empty-state" id="table-empty-state">
+          Aguardando a primeira mensagem da estação de solo&hellip;
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
